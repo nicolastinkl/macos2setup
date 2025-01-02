@@ -84,35 +84,49 @@ fi
 # 完成安装
 
 # 检查并输出所有工具的版本信息
+
+
+# 显示系统信息
+echo "系统信息："
+echo "操作系统名称：$(uname -s)"
+echo "系统内核版本：$(uname -r)"
+echo "系统架构：$(uname -m)"
+echo "CPU 信息：$(sysctl -n machdep.cpu.brand_string)"
+echo "内存总量：$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024)) GB"
+
+
+# 检查并输出所有工具的版本信息
 echo "检查已安装工具的版本："
+echo ""
 if command -v wget &>/dev/null; then
   echo "wget 版本：$(wget -V | head -n 1)"
 else
   echo "wget 未安装。"
 fi
-
+echo ""
 if command -v pod &>/dev/null; then
   echo "Cocoapods 版本：$(pod --version)"
 else
   echo "Cocoapods 未安装。"
 fi
-
+echo ""
 if command -v flutter &>/dev/null; then
   echo "Flutter 版本：$(flutter --version)"
 else
   echo "Flutter 未安装。"
 fi
-
+echo ""
 if command -v rbenv &>/dev/null; then
   echo "rbenv 版本：$(rbenv -v)"
 else
   echo "rbenv 未安装。"
 fi
-
+echo ""
 if command -v ruby &>/dev/null; then
   echo "Ruby 版本：$(ruby -v)"
 else
   echo "Ruby 未安装。"
 fi
+
 
 echo "安装完成！请确认各项工具是否正确安装。"
