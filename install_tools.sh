@@ -1,76 +1,76 @@
 #!/bin/bash
 
-# 检查是否为管理员权限
+# Check for Administrator Privileges
 if [ "$EUID" -ne 0 ]; then
-  echo "请使用管理员权限运行脚本 (sudo)。"
+  echo "Please run the script with administrator privileges (sudo)."
   exit
 fi
 
-echo "开始安装 Xcode 15.1、VS Code、Flutter 和 Cocoapods..."
+echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
 
-# 更新系统和工具
-echo "更新系统..."
+# Update System and Tools
+echo "Updating system..."
 softwareupdate --install --all
 
-# 安装 Oh My Zsh
+# Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "安装 Oh My Zsh..."
+  echo "Installing Oh My Zsh..."
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 else
-  echo "Oh My Zsh 已安装，跳过。"
+  echo "Oh My Zsh is already installed, skipping."
 fi
 
-# 安装 Homebrew
+# Install Homebrew
 if ! command -v brew &>/dev/null; then
-  echo "安装 Homebrew..."
+  echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-  echo "Homebrew 已安装，跳过。"
+  echo "Homebrew is already installed, skipping."
 fi
 
-# 安装必要的依赖
-echo "安装开发工具..."
-brew install wget git rbenv ruby-build || echo "必要依赖已安装，跳过。"
+# Install Required Dependencies
+echo "Installing development tools..."
+brew install wget git rbenv ruby-build || echo "Required dependencies are already installed, skipping."
 
-# 安装 Xcode 15.1 (需手动同意许可协议)
+# Install Xcode 15.1 (requires manual license agreement)
 if ! xcode-select -p &>/dev/null; then
-  echo "安装 Xcode 15.1..."
+  echo "Installing Xcode 15.1..."
   xcode-select --install
   sudo xcodebuild -license accept
 else
-  echo "Xcode 已安装，跳过。"
+  echo "Xcode is already installed, skipping."
 fi
 
-# 安装 VS Code
+# Install VS Code
 if [ ! -d "/Applications/Visual Studio Code.app" ]; then
-  echo "安装 VS Code..."
+  echo "Installing VS Code..."
   wget -O vscode.zip https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal
   unzip vscode.zip -d /Applications/
   rm vscode.zip
 else
-  echo "VS Code 已安装，跳过。"
+  echo "VS Code is already installed, skipping."
 fi
 
-# 安装 Flutter
+# Install Flutter
 if [ ! -d "$HOME/Developer/flutter" ]; then
-  echo "安装 Flutter..."
+  echo "Installing Flutter..."
   wget https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.27.1-stable.zip
   unzip flutter_macos_3.27.1-stable.zip -d ~/Developer/
   rm flutter_macos_3.27.1-stable.zip
   export PATH="$PATH:$HOME/Developer/flutter/bin"
 else
-  echo "Flutter 已安装，跳过。"
+  echo "Flutter is already installed, skipping."
 fi
 
-# 验证 Flutter 安装
-echo "验证 Flutter 安装..."
+# Verify Flutter Installation
+echo "Verifying Flutter installation..."
 flutter doctor
 
-# 配置 Ruby 和安装 Cocoapods
+# Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
-  echo "配置 Ruby 和安装 Cocoapods..."
+  echo "Configuring Ruby and installing Cocoapods..."
   echo 'eval "$(rbenv init -)"' >>~/.zshrc
   source ~/.zshrc
   rbenv install 3.2.6
@@ -78,55 +78,55 @@ if ! command -v rbenv &>/dev/null; then
   ruby -v
   gem install cocoapods
 else
-  echo "Ruby 和 Cocoapods 已安装，跳过。"
+  echo "Ruby and Cocoapods are already installed, skipping."
 fi
 
-# 完成安装
+# Completion of installation
 
-# 检查并输出所有工具的版本信息
-
-
-# 显示系统信息
-echo "系统信息："
-echo "操作系统名称：$(uname -s)"
-echo "系统内核版本：$(uname -r)"
-echo "系统架构：$(uname -m)"
-echo "CPU 信息：$(sysctl -n machdep.cpu.brand_string)"
-echo "内存总量：$(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024)) GB"
+# Check and output the version information of all tools
 
 
-# 检查并输出所有工具的版本信息
-echo "检查已安装工具的版本："
+# Display System Information
+echo "System Information:"
+echo "Operating System: $(uname -s)"
+echo "Kernel Version: $(uname -r)"
+echo "Architecture: $(uname -m)"
+echo "CPU Information: $(sysctl -n machdep.cpu.brand_string)"
+echo "Total Memory: $(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024)) GB"
+
+
+# Check and output the version information of all installed tools
+echo "Checking installed tool versions:"
 echo ""
 if command -v wget &>/dev/null; then
-  echo "wget 版本：$(wget -V | head -n 1)"
+  echo "wget Version: $(wget -V | head -n 1)"
 else
-  echo "wget 未安装。"
+  echo "wget is not installed."
 fi
 echo ""
 if command -v pod &>/dev/null; then
-  echo "Cocoapods 版本：$(pod --version)"
+  echo "Cocoapods Version: $(pod --version)"
 else
-  echo "Cocoapods 未安装。"
+  echo "Cocoapods is not installed."
 fi
 echo ""
 if command -v flutter &>/dev/null; then
-  echo "Flutter 版本：$(flutter --version)"
+  echo "Flutter Version: $(flutter --version)"
 else
-  echo "Flutter 未安装。"
+  echo "Flutter is not installed."
 fi
 echo ""
 if command -v rbenv &>/dev/null; then
-  echo "rbenv 版本：$(rbenv -v)"
+  echo "rbenv Version: $(rbenv -v)"
 else
-  echo "rbenv 未安装。"
+  echo "rbenv is not installed."
 fi
 echo ""
 if command -v ruby &>/dev/null; then
-  echo "Ruby 版本：$(ruby -v)"
+  echo "Ruby Version: $(ruby -v)"
 else
-  echo "Ruby 未安装。"
+  echo "Ruby is not installed."
 fi
 
 
-echo "安装完成！请确认各项工具是否正确安装。"
+echo "Installation completed! Please verify if all tools have been correctly installed."
