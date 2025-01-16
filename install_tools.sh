@@ -10,7 +10,7 @@ echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
 
 # Update System and Tools
 echo "Updating system..."
-softwareupdate --install --all
+# softwareupdate --install --all
 
 # Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
