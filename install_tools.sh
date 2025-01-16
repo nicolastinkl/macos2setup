@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Check for Administrator Privileges
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run the script with administrator privileges (sudo)."
-  exit
-fi
+# if [ "$EUID" -ne 0 ]; then
+#   echo "Please run the script with administrator privileges (sudo)."
+#   exit
+# fi
 
 echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
 
