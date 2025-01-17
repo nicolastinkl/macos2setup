@@ -35,10 +35,12 @@ echo "Installing development tools..."
 brew install wget git rbenv ruby-build || echo "Required dependencies are already installed, skipping."
 
 # Install Xcode 15.1 (requires manual license agreement)
-if ! xcode-select -p &>/dev/null; then
+if ! xcodeproj -p &>/dev/null; then
   echo "Installing Xcode 15.1..."
-  xcode-select --install
-  sudo xcodebuild -license accept
+  # xcode-select --install
+  # sudo xcodebuild -license accept
+  wget -O xcode.zip https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
+  unzip xcode.zip -d /Applications/
 else
   echo "Xcode is already installed, skipping."
 fi
