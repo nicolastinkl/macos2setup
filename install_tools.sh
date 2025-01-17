@@ -1,18 +1,12 @@
 #!/bin/bash
 
-# Check for Administrator Privileges
-# if [ "$EUID" -ne 0 ]; then
-#   echo "Please run the script with administrator privileges (sudo)."
-#   exit
-# fi
-
 echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
 
-# Update System and Tools
-# echo "Updating system..."
-# softwareupdate --install --all
+pause() {
+  echo ""
+  read -p "Press Enter to continue to the next step..."
+}
 
- 
 # Install Homebrew
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew..."
@@ -22,21 +16,22 @@ if ! command -v brew &>/dev/null; then
 else
   echo "Homebrew is already installed, skipping."
 fi
+pause
 
 # Install Required Dependencies
 echo "Installing development tools..."
 brew install wget git rbenv ruby-build || echo "Required dependencies are already installed, skipping."
+pause
 
 # Install Xcode 15.1 (requires manual license agreement)
 if ! xcodeproj -p &>/dev/null; then
   echo "Installing Xcode 15.1..."
-  # xcode-select --install
-  # sudo xcodebuild -license accept
   wget -O xcode.zip https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
   unzip xcode.zip -d /Applications/
 else
   echo "Xcode is already installed, skipping."
 fi
+pause
 
 # Install VS Code
 if [ ! -d "/Applications/Visual Studio Code.app" ]; then
@@ -47,6 +42,7 @@ if [ ! -d "/Applications/Visual Studio Code.app" ]; then
 else
   echo "VS Code is already installed, skipping."
 fi
+pause
 
 # Install Flutter
 if [ ! -d "$HOME/Developer/flutter" ]; then
@@ -58,6 +54,7 @@ if [ ! -d "$HOME/Developer/flutter" ]; then
 else
   echo "Flutter is already installed, skipping."
 fi
+pause
 
 # Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -66,10 +63,12 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 else
   echo "Oh My Zsh is already installed, skipping."
 fi
+pause
 
 # Verify Flutter Installation
 echo "Verifying Flutter installation..."
 flutter doctor
+pause
 
 # Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
@@ -83,11 +82,7 @@ if ! command -v rbenv &>/dev/null; then
 else
   echo "Ruby and Cocoapods are already installed, skipping."
 fi
-
-# Completion of installation
-
-# Check and output the version information of all tools
-
+pause
 
 # Display System Information
 echo "System Information:"
@@ -96,40 +91,34 @@ echo "Kernel Version: $(uname -r)"
 echo "Architecture: $(uname -m)"
 echo "CPU Information: $(sysctl -n machdep.cpu.brand_string)"
 echo "Total Memory: $(($(sysctl -n hw.memsize) / 1024 / 1024 / 1024)) GB"
-
+pause
 
 # Check and output the version information of all installed tools
 echo "Checking installed tool versions:"
-echo ""
 if command -v wget &>/dev/null; then
   echo "wget Version: $(wget -V | head -n 1)"
 else
   echo "wget is not installed."
 fi
-echo ""
 if command -v pod &>/dev/null; then
   echo "Cocoapods Version: $(pod --version)"
 else
   echo "Cocoapods is not installed."
 fi
-echo ""
 if command -v flutter &>/dev/null; then
   echo "Flutter Version: $(flutter --version)"
 else
   echo "Flutter is not installed."
 fi
-echo ""
 if command -v rbenv &>/dev/null; then
   echo "rbenv Version: $(rbenv -v)"
 else
   echo "rbenv is not installed."
 fi
-echo ""
 if command -v ruby &>/dev/null; then
   echo "Ruby Version: $(ruby -v)"
 else
   echo "Ruby is not installed."
 fi
-
 
 echo "Installation completed! Please verify if all tools have been correctly installed."
