@@ -1,5 +1,7 @@
 #!/bin/bash
 
+zsh
+
 echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
 
 pause() {
