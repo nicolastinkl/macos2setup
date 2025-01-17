@@ -127,6 +127,9 @@ else
   rbenv global $RUBY_VERSION     # Set the version globally
   source ~/.zshrc                 # Reload the shell configuration
   
+  rbenv versions
+  rbenv which ruby 
+
   ruby -v 
   # sudo gem install cocoapods
    # Install Cocoapods
