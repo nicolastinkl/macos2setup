@@ -107,10 +107,7 @@ if ! command -v rbenv &>/dev/null; then
   echo "Configuring Ruby and installing Cocoapods..."
   echo 'eval "$(rbenv init -)"' >>~/.zshrc
   source ~/.zshrc
-  rbenv install 3.2.6
-  rbenv global 3.2.6
-  ruby -v
-  gem install cocoapods
+ 
 else
   echo "Ruby and Cocoapods are already installed, skipping."
 fi
@@ -120,12 +117,14 @@ if command -v pod &>/dev/null; then
   echo "Cocoapods Version: $(pod --version)"
 else
   echo "Cocoapods is not installed."
-  gem install cocoapods
+  rbenv install 3.2.6
+  rbenv global 3.2.6
+  ruby -v 
+  sudo gem install cocoapods
 fi
 
 source ~/.zshrc 
-
-
+ 
 # Display System Information
 echo "System Information:"
 echo "Operating System: $(uname -s)"
