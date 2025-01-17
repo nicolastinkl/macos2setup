@@ -135,11 +135,14 @@ else
    # Install Cocoapods
   if ! gem list cocoapods -i; then
     echo "Installing Cocoapods..."
-    sudo gem install cocoapods
+    gem install cocoapods
     rbenv rehash                  # Ensure rbenv recognizes new executables
   else
     echo "Cocoapods is already installed."
   fi
+
+  pod --version
+  
 fi
 
 source ~/.zshrc 
