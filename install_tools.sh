@@ -105,6 +105,7 @@ pause
 # Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
   echo "Configuring Ruby and installing Cocoapods..."
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >>~/.zshrc
   echo 'eval "$(rbenv init -)"' >>~/.zshrc
   source ~/.zshrc
  
@@ -119,8 +120,18 @@ else
   echo "Cocoapods is not installed."
   rbenv install 3.2.6
   rbenv global 3.2.6
+  source ~/.zshrc                 # Reload the shell configuration
+  
   ruby -v 
-  sudo gem install cocoapods
+  # sudo gem install cocoapods
+   # Install Cocoapods
+  if ! gem list cocoapods -i; then
+    echo "Installing Cocoapods..."
+    sudo gem install cocoapods
+    rbenv rehash                  # Ensure rbenv recognizes new executables
+  else
+    echo "Cocoapods is already installed."
+  fi
 fi
 
 source ~/.zshrc 
