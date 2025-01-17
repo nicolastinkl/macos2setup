@@ -11,11 +11,20 @@ pause() {
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  # echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zshrc
+  echo 'eval "$(/usr/local/bin/brew shellenv)"' >>~/.zshrc
+  eval "$(/usr/local/bin/brew shellenv)" 
+  source ~/.zshrc 
 else
   echo "Homebrew is already installed, skipping."
 fi
+
+if command -v brew &>/dev/null; then
+  echo "brew Version: $(brew -v)"
+else
+  echo "brew is not installed."
+fi
+
 pause
 
 # Install Required Dependencies
@@ -24,10 +33,24 @@ brew install wget git rbenv ruby-build || echo "Required dependencies are alread
 pause
 
 # Install Xcode 15.1 (requires manual license agreement)
+# Install Xcode 15.1 (requires manual license agreement)
 if ! xcodeproj -p &>/dev/null; then
   echo "Installing Xcode 15.1..."
-  wget -O xcode.zip https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
-  unzip xcode.zip -d /Applications/
+  if [ ! -f "xcode.zip" ]; then
+    echo "Downloading Xcode 15.1..."
+    wget -O xcode.zip https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
+  else
+    echo "xcode.zip already exists, skipping download."
+  fi
+  
+  # Check if the zip file exists and is valid
+  if [ -f "xcode.zip" ]; then
+    echo "Unzipping Xcode..."
+    unzip xcode.zip -d /Applications/
+  else
+    echo "xcode.zip not found or invalid, download failed."
+    exit 1
+  fi
 else
   echo "Xcode is already installed, skipping."
 fi
