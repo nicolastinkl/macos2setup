@@ -118,8 +118,13 @@ if command -v pod &>/dev/null; then
   echo "Cocoapods Version: $(pod --version)"
 else
   echo "Cocoapods is not installed."
-  rbenv install 3.2.6
-  rbenv global 3.2.6
+  # rbenv install 3.2.6
+  # rbenv global 3.2.6
+  RUBY_VERSION="3.1.0"  # Specify the desired Ruby version
+
+  echo "Installing and setting Ruby version to $RUBY_VERSION..."
+  rbenv install -s $RUBY_VERSION  # Install the version if not already installed
+  rbenv global $RUBY_VERSION     # Set the version globally
   source ~/.zshrc                 # Reload the shell configuration
   
   ruby -v 
