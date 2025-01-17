@@ -148,7 +148,6 @@ else
     echo "Cocoapods is already installed."
   fi
 
-  pod --version
 
 fi
 
