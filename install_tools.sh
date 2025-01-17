@@ -99,14 +99,22 @@ fi
 pause
 
 
-# Install Oh My Zsh
-# if [ ! -d "$HOME/.oh-my-zsh" ]; then
-#   echo "Installing Oh My Zsh..."
-#   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# else
-#   echo "Oh My Zsh is already installed, skipping."
-# fi
-# pause
+if [ ! -f "xcode.zip" ]; then
+  echo "Downloading Xcode 15.1..."
+  open https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
+else
+  echo "xcode.zip already exists, skipping download."
+fi
+pause
+
+Install Oh My Zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing Oh My Zsh..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "Oh My Zsh is already installed, skipping."
+fi
+pause
  
 
 # Configure Ruby and Install Cocoapods
