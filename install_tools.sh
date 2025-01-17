@@ -9,17 +9,10 @@
 echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
 
 # Update System and Tools
-echo "Updating system..."
+# echo "Updating system..."
 # softwareupdate --install --all
 
-# Install Oh My Zsh
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  echo "Oh My Zsh is already installed, skipping."
-fi
-
+ 
 # Install Homebrew
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew..."
@@ -64,6 +57,14 @@ if [ ! -d "$HOME/Developer/flutter" ]; then
   export PATH="$PATH:$HOME/Developer/flutter/bin"
 else
   echo "Flutter is already installed, skipping."
+fi
+
+# Install Oh My Zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing Oh My Zsh..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "Oh My Zsh is already installed, skipping."
 fi
 
 # Verify Flutter Installation
