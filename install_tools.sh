@@ -82,10 +82,21 @@ if [ ! -d "$HOME/Developer/flutter" ]; then
   unzip flutter_macos_3.27.1-stable.zip -d ~/Developer/
   rm flutter_macos_3.27.1-stable.zip
   export PATH="$PATH:$HOME/Developer/flutter/bin"
+
+  # Verify Flutter Installation
+  echo "Verifying Flutter installation..."
+  flutter doctor
+  flutter --disable-analytics
 else
   echo "Flutter is already installed, skipping."
+
+  if ! command -v flutter &>/dev/null; then
+    export PATH="$PATH:$HOME/Developer/flutter/bin"
+    source ~/.zshrc
+  fi
 fi
 pause
+
 
 # Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -95,12 +106,7 @@ else
   echo "Oh My Zsh is already installed, skipping."
 fi
 pause
-
-# Verify Flutter Installation
-echo "Verifying Flutter installation..."
-flutter doctor
-flutter --disable-analytics
-pause
+ 
 
 # Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
@@ -142,7 +148,7 @@ else
   fi
 
   pod --version
-  
+
 fi
 
 source ~/.zshrc 
