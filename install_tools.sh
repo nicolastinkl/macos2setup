@@ -42,7 +42,25 @@ if [ ! -d "/Applications/Visual Studio Code.app" ]; then
   else
     echo "vscode.zip already exists, skipping download."
   fi
- 
+
+  # Verify the integrity of the downloaded file
+  if [ -f "vscode.zip" ]; then
+    FILE_SIZE=$(stat -c%s "vscode.zip")
+    MIN_SIZE=$((10 * 1024 * 1024)) # 10MB in bytes
+
+    if [ "$FILE_SIZE" -lt "$MIN_SIZE" ]; then
+      echo "File size is too small ($FILE_SIZE bytes). Download might have failed."
+      echo "Deleting corrupted vscode.zip and retrying download..."
+      rm -f vscode.zip
+      wget -O vscode.zip "https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal"
+    else
+      echo "File size is valid ($FILE_SIZE bytes). Proceeding to unzip."
+    fi
+  else
+    echo "vscode.zip not found. Download failed."
+    exit 1
+  fi
+
   # Attempt to unzip the file
   if ! unzip vscode.zip -d /Applications/; then
     echo "Unzipping failed! The file might be corrupted."
