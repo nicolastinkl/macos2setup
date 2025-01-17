@@ -121,12 +121,16 @@ pause
 
 # Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
-  echo "Configuring Ruby and installing Cocoapods..."
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >>~/.zshrc
-  echo 'eval "$(rbenv init -)"' >>~/.zshrc
-  source ~/.zshrc
+  # echo "Configuring Ruby and installing Cocoapods..."
+  # echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >>~/.zshrc
+  # echo 'eval "$(rbenv init -)"' >>~/.zshrc
+  # source ~/.zshrc
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
  
 else
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
   echo "Ruby and Cocoapods are already installed, skipping."
 fi
 pause
@@ -143,7 +147,8 @@ else
   rbenv install -s $RUBY_VERSION  # Install the version if not already installed
   rbenv global $RUBY_VERSION     # Set the version globally
   source ~/.zshrc                 # Reload the shell configuration
-  
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
   rbenv versions
   rbenv which ruby 
 
@@ -153,7 +158,7 @@ else
   if ! gem list cocoapods -i; then
     echo "Installing Cocoapods..."
     gem install cocoapods
-    rbenv rehash                  # Ensure rbenv recognizes new executables
+    # rbenv rehash                  # Ensure rbenv recognizes new executables
   else
     echo "Cocoapods is already installed."
   fi
