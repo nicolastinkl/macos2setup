@@ -8,6 +8,17 @@ pause() {
   read -p "Press Enter to continue to the next step..."
 }
 
+
+Install Oh My Zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing Oh My Zsh..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "Oh My Zsh is already installed, skipping."
+fi
+pause
+
+
 # Install Homebrew
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew..."
@@ -107,15 +118,6 @@ else
 fi
 pause
 
-Install Oh My Zsh
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "Installing Oh My Zsh..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  echo "Oh My Zsh is already installed, skipping."
-fi
-pause
- 
 
 # Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
