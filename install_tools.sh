@@ -1,6 +1,5 @@
 #!/bin/bash
-
-zsh
+ 
 
 echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
 
@@ -101,13 +100,13 @@ pause
 
 
 # Install Oh My Zsh
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "Installing Oh My Zsh..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  echo "Oh My Zsh is already installed, skipping."
-fi
-pause
+# if [ ! -d "$HOME/.oh-my-zsh" ]; then
+#   echo "Installing Oh My Zsh..."
+#   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# else
+#   echo "Oh My Zsh is already installed, skipping."
+# fi
+# pause
  
 
 # Configure Ruby and Install Cocoapods
