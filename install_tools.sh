@@ -32,52 +32,6 @@ echo "Installing development tools..."
 brew install wget git rbenv ruby-build || echo "Required dependencies are already installed, skipping."
 pause
 
-# Install Xcode 15.1 (requires manual license agreement)
-# Install Xcode 15.1 (requires manual license agreement)
-# Install Xcode 15.1 (requires manual license agreement)
-if ! xcodeproj -p &>/dev/null; then
-  echo "Installing Xcode 15.1..."
-  
-  if [ ! -f "xcode.zip" ]; then
-    echo "Downloading Xcode 15.1..."
-    wget -O xcode.zip https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
-  else
-    echo "xcode.zip already exists, skipping download."
-  fi
-
-  # Verify the integrity of the downloaded file
-  if [ -f "xcode.zip" ]; then
-    echo "Verifying xcode.zip integrity..."
-    
-    # Check file size (replace 123456789 with the actual expected size in bytes)
-    EXPECTED_SIZE=123456789
-    FILE_SIZE=$(stat -c%s "xcode.zip")
-    
-    if [ "$FILE_SIZE" -ne "$EXPECTED_SIZE" ]; then
-      echo "File size mismatch! Expected $EXPECTED_SIZE bytes, but got $FILE_SIZE bytes."
-      echo "Deleting corrupted xcode.zip and retrying download..."
-      rm -f xcode.zip
-      wget -O xcode.zip https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
-    else
-      echo "File size matches the expected value."
-    fi
-
-    # Attempt to unzip the file
-    echo "Unzipping Xcode..."
-    if ! unzip xcode.zip -d /Applications/; then
-      echo "Unzipping failed! The file might be corrupted."
-      rm -f xcode.zip
-      exit 1
-    fi
-  else
-    echo "xcode.zip not found. Download failed."
-    exit 1
-  fi
-else
-  echo "Xcode is already installed, skipping."
-fi
-pause
-
 # Install VS Code
 # Install VS Code
 if [ ! -d "/Applications/Visual Studio Code.app" ]; then
@@ -169,7 +123,7 @@ else
   gem install cocoapods
 fi
 
-
+source ~/.zshrc 
 
 
 # Display System Information
