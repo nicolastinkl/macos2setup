@@ -152,7 +152,8 @@ else
   source ~/.zshenv                 # Reload the shell configuration
   # export PATH="$HOME/.rbenv/bin:$PATH"
   
-  eval "$(rbenv init -)"
+  # eval "$(rbenv init -)"
+  echo 'eval "$(rbenv init -)"' >>~/.zshenv
   rbenv versions
   rbenv which ruby 
 
