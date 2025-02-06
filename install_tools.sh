@@ -93,8 +93,9 @@ if [ ! -d "$HOME/Developer/flutter" ]; then
   wget https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.27.1-stable.zip
   unzip flutter_macos_3.27.1-stable.zip -d ~/Developer/
   rm flutter_macos_3.27.1-stable.zip
-  export PATH="$PATH:$HOME/Developer/flutter/bin"
+  
 
+  echo 'export PATH="$PATH:$HOME/Developer/flutter/bin"' >> ~/.zshenv
   # Verify Flutter Installation
   echo "Verifying Flutter installation..."
   flutter doctor
@@ -103,7 +104,7 @@ else
   echo "Flutter is already installed, skipping."
 
   if ! command -v flutter &>/dev/null; then
-    export PATH="$PATH:$HOME/Developer/flutter/bin"
+    echo 'export PATH="$PATH:$HOME/Developer/flutter/bin"' >> ~/.zshenv
     source ~/.zshenv
   fi
 fi
@@ -125,11 +126,12 @@ if ! command -v rbenv &>/dev/null; then
   # echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >>~/.zshenv
   # echo 'eval "$(rbenv init -)"' >>~/.zshenv
   # source ~/.zshenv
-  export PATH="$HOME/.rbenv/bin:$PATH"
+  
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshenv
   eval "$(rbenv init -)"
  
 else
-  export PATH="$HOME/.rbenv/bin:$PATH"
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshenv
   eval "$(rbenv init -)"
   echo "Ruby and Cocoapods are already installed, skipping."
 fi
@@ -146,8 +148,10 @@ else
   echo "Installing and setting Ruby version to $RUBY_VERSION..."
   rbenv install -s $RUBY_VERSION  # Install the version if not already installed
   rbenv global $RUBY_VERSION     # Set the version globally
+  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshenv
   source ~/.zshenv                 # Reload the shell configuration
-  export PATH="$HOME/.rbenv/bin:$PATH"
+  # export PATH="$HOME/.rbenv/bin:$PATH"
+  
   eval "$(rbenv init -)"
   rbenv versions
   rbenv which ruby 
