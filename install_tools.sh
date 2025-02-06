@@ -149,16 +149,14 @@ else
   rbenv install -s $RUBY_VERSION  # Install the version if not already installed
   rbenv global $RUBY_VERSION     # Set the version globally
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshenv
-               # Reload the shell configuration
-  # export PATH="$HOME/.rbenv/bin:$PATH"
+  # Reload the shell configuration
   
-  # eval "$(rbenv init -)"
   eval "$(rbenv init -)"
   rbenv versions
   rbenv which ruby 
 
   source ~/.zshenv  
-  rbenv rehash   
+  # rbenv rehash   
 
   ruby -v 
   # sudo gem install cocoapods
