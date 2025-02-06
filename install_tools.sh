@@ -122,10 +122,10 @@ pause
 
 # Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
-  # echo "Configuring Ruby and installing Cocoapods..."
+  echo "Configuring Ruby and installing Cocoapods..."
   # echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >>~/.zshenv
-  # echo 'eval "$(rbenv init -)"' >>~/.zshenv
-  # source ~/.zshenv
+  echo 'eval "$(rbenv init -)"' >>~/.zshenv
+  source ~/.zshenv
   
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshenv
   eval "$(rbenv init -)"
@@ -150,6 +150,7 @@ else
   rbenv global $RUBY_VERSION     # Set the version globally
   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshenv
   # Reload the shell configuration
+  echo 'eval "$(rbenv init -)"' >>~/.zshenv
   
   eval "$(rbenv init -)"
   rbenv versions
