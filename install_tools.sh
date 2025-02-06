@@ -18,15 +18,15 @@ pause() {
 # fi
 # pause
 
-
+touch  ~/.zshenv 
 # Install Homebrew
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zshrc
-  echo 'eval "$(/usr/local/bin/brew shellenv)"' >>~/.zshrc
+  # echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zshenv
+  echo 'eval "$(/usr/local/bin/brew shellenv)"' >>~/.zshenv
   eval "$(/usr/local/bin/brew shellenv)" 
-  source ~/.zshrc 
+  source ~/.zshenv 
 else
   echo "Homebrew is already installed, skipping."
 fi
@@ -104,7 +104,7 @@ else
 
   if ! command -v flutter &>/dev/null; then
     export PATH="$PATH:$HOME/Developer/flutter/bin"
-    source ~/.zshrc
+    source ~/.zshenv
   fi
 fi
 pause
@@ -122,9 +122,9 @@ pause
 # Configure Ruby and Install Cocoapods
 if ! command -v rbenv &>/dev/null; then
   # echo "Configuring Ruby and installing Cocoapods..."
-  # echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >>~/.zshrc
-  # echo 'eval "$(rbenv init -)"' >>~/.zshrc
-  # source ~/.zshrc
+  # echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >>~/.zshenv
+  # echo 'eval "$(rbenv init -)"' >>~/.zshenv
+  # source ~/.zshenv
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
  
@@ -146,7 +146,7 @@ else
   echo "Installing and setting Ruby version to $RUBY_VERSION..."
   rbenv install -s $RUBY_VERSION  # Install the version if not already installed
   rbenv global $RUBY_VERSION     # Set the version globally
-  source ~/.zshrc                 # Reload the shell configuration
+  source ~/.zshenv                 # Reload the shell configuration
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
   rbenv versions
@@ -166,7 +166,7 @@ else
 
 fi
 
-source ~/.zshrc 
+source ~/.zshenv 
  
 # Display System Information
 echo "System Information:"
