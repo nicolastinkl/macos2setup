@@ -97,9 +97,13 @@ if [ ! -d "$HOME/Developer/flutter" ]; then
 
   echo 'export PATH="$PATH:$HOME/Developer/flutter/bin"' >> ~/.zshenv
   # Verify Flutter Installation
+  # 
+  
   echo "Verifying Flutter installation..."
-  flutter doctor
+  source ~/.zshenv
+  flutter doctor -v
   flutter --disable-analytics
+  
 else
   echo "Flutter is already installed, skipping."
 
