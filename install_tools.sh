@@ -116,8 +116,8 @@ pause
 
 
 if [ ! -f "xcode.zip" ]; then
-  echo "Downloading Xcode 15.1..."
-  open https://ios-source.oss-cn-beijing.aliyuncs.com/Xcode_15.1.xip
+  echo "Downloading Xcode 16.2"
+  open https://drive.google.com/file/d/1nuu-OCWyJ_XxDmoxdo510uLX-tgP30Ka/view?usp=sharing
 else
   echo "xcode.zip already exists, skipping download."
 fi
