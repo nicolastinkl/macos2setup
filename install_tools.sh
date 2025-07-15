@@ -92,8 +92,8 @@ if [ ! -d "$HOME/Developer/flutter" ]; then
   echo "Installing Flutter..."
   wget  https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.32.3-stable.zip
   #https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.27.1-stable.zip
-  unzip flutter_macos_3.27.1-stable.zip -d ~/Developer/
-  rm flutter_macos_3.27.1-stable.zip
+  unzip flutter_macos_3.32.3-stable.zip -d ~/Developer/
+  rm flutter_macos_3.32.3-stable.zip
   
 
   echo 'export PATH="$PATH:$HOME/Developer/flutter/bin"' >> ~/.zshenv
