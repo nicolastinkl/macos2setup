@@ -178,6 +178,11 @@ else
 
 fi
 
+
+brew install ffsend
+ffsend --help
+
+
 source ~/.zshenv 
  
 # Display System Information
