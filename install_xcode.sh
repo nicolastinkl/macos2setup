@@ -1,7 +1,7 @@
 #!/bin/bash
  
 
-echo "Starting installation of Xcode 15.1, VS Code, Flutter, and Cocoapods..."
+echo "Starting installation of Xcode 15.1.."
 
 pause() {
   echo ""
