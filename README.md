@@ -30,7 +30,11 @@ Before running the script, ensure your macOS VPS meets the following requirement
 Execute the setup script as an administrator:
 
 ```bash
+# install all app
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/nicolastinkl/macos2setup/refs/heads/main/install_tools.sh)"
+
+# install xcode only
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/nicolastinkl/macos2setup/refs/heads/main/install_xcode.sh)"
 
 ```
 
