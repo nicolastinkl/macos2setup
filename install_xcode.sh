@@ -1,7 +1,7 @@
 #!/bin/bash
  
 
-echo "Starting installation of Xcode 15.1.."
+echo "Starting installation of Xcode 16..."
 
 pause() {
   echo ""
