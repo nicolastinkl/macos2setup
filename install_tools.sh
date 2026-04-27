@@ -50,7 +50,8 @@ if [ ! -d "/Applications/Visual Studio Code.app" ]; then
   echo "Installing VS Code..."
   if [ ! -f "vscode.zip" ]; then
     echo "Downloading VS Code..."
-    wget -O vscode.zip "https://vscode.download.prss.microsoft.com/dbazure/download/stable/10c8e557c8b9f9ed0a87f61f1c9a44bde731c409/VSCode-darwin-universal.dmg"
+    wget -O vscode.zip ""
+    open https://code.visualstudio.com/thank-you?dv=osx
   else
     echo "vscode.zip already exists, skipping download."
   fi
